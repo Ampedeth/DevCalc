@@ -1,78 +1,200 @@
+/* Кольорові змінні */
+:root {
+    --primary-color: #e88234;
+    --secondary-color: #8c9091;
+    /* Світла тема */
+    --light-bg: #fff;
+    --light-text: #000;
+    --light-nav: #fff;
+    --light-main: #fff;
+    --light-select: #000;
+    --light-result: #000;
+    /* Темна тема */
+    --dark-bg: #171717;
+    --dark-text: #f5f5f5;
+    --dark-nav: #000000;
+    --dark-main: #252525;
+    --dark-select: #f5f5f5;
+    --dark-result: #ffffff;
+}
+
+/* Загальні стилі */
 body {
-    margin: 0;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* Шапка */
+.header {
+    background-color: var(--nav);
+    box-shadow: 8, 8, 8, #000000;
+    padding: 1%;
+}
+
+/* Навігація */
+.navbar {
+    padding: 1%;
+}
+
+.navbar-brand-container {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar-logo {
+    width: 30px;
+    height: 30px;
+}
+
+.navbar-brand {
+    margin-left: 10px;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--text);
+}
+
+.nav-link:hover {
+    color: var(--dark-text);
+}
+
+.light-theme .nav-link {
+    color: #171717;
+}
+
+.light-theme .nav-link:hover {
+    color: #000000;
+}
+
+.dark-theme .nav-link {
+    color: #f5f5f5;
+}
+
+.dark-theme .nav-link:hover {
+    color: #ffffff;
+}
+
+/* Кнопка зміни теми */
+.theme-button {
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.theme-button span {
+    margin-right: 8px;
+}
+
+.theme-button img {
+    height: 30px;
+    transition: opacity 0.3s ease;
+}
+
+.theme-button img.hidden {
+    opacity: 0;
+}
+
+/* Калькулятор */
+.calculator {
+    padding: 10%;
+    padding-top: 96px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--main);
+}
+
+.input-num {
+    height: 100%;
+    width: 100%;
+}
+
+/* Кнопка обчислення */
+.calculate-button {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
 }
 
-.theme-toggle {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 5px;
-    background-color: #ccc;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.theme-toggle:hover {
-    background-color: #aaa;
-}
-
-.calculator {
-    width: 400px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.select-block {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.select-block select {
-    width: 100px;
-    padding: 3px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.input-block{
-    margin: 5px 0px 5px 0px;
-}
-
-.select-action-block{
-    padding: 5px 0px 5px 0px;
-}
-
-.result-block {
-    margin-top: 5px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    background-color: #f9f9f9;
-}
-
-
-.calculate-button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    background-color: #007bff;
+.calculate-button button {
+    font-size: 2rem;
+    height: 25%;
+    width: 25%;
+    background-color: #0A66C2;
+    border: 0;
+    border-radius: 100px;
     color: #fff;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    background-image: linear-gradient(to right, #e88234, #8c9091);
+    display: inline-flex;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 20px;
+    min-height: 40px;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1), color 0.167s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.calculate-button:hover {
-    background-image: linear-gradient(to right, #8c9091, #e88234);
+.calculate-button button:hover { 
+    background-color: #16437E;
+}
+
+.calculate-button button:active {
+    background: #09223b;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.calculate-button button:disabled { 
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.3);
+}  
+
+/* Блок результату */
+.result-block {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--result);
+}
+
+/* Футер */
+footer {
+    margin-top: auto;
+}
+
+.footer-txt-right {
+    text-align: end;
+}
+
+/* Теми */
+.light-theme {
+    --bg: var(--light-bg);
+    --text: var(--light-text);
+    --nav: var(--light-nav);
+    --main: var(--light-main);
+    --select: var(--light-select);
+    --result: var(--light-result);
+}
+
+.dark-theme {
+    --bg: var(--dark-bg);
+    --text: var(--dark-text);
+    --nav: var(--dark-nav);
+    --main: var(--dark-main);
+    --select: var(--dark-select);
+    --result: var(--dark-result);
 }

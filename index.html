@@ -3,53 +3,99 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Підключення стилів -->
+    <link rel="stylesheet" href="./CSS/reset.css" />
+    <link rel="stylesheet" href="./CSS/standard.css">
     <link rel="stylesheet" href="./CSS/styles.css" />
-    <title>Calculator</title>
+    <!-- Підключення іконки -->
+    <link rel="icon" href="./IMG/calculator.png">
+    <!-- Підключення Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- підключення шрифту -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>DevCalc</title>
   </head>
   <body>
-    <div class="calculator">
-      <div class="select-block">
-        <label id="select-label-number-system" for="number-system"
-          >Виберіть систему в якій записуватимуться числа</label
-        >
-        <select id="number-system">
+    <!-- Навігація по сайту -->
+    <nav class="navbar-expand-lg navbar mar-24 header" id="navbar" style="padding: 1%;">
+      <a href="#" class="navbar-brand-container">
+        <img src="./IMG/calculator.png" alt="logo" class="navbar-logo">
+        <span class="navbar-brand nav-link">DevCalc</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Калькулятор</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Конвертор</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Довідка</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <button class="theme-button" onclick="toggleTheme()">
+              <span class="nav-link">Змінити тему</span>
+              <img src="./IMG/moon.png" alt="moon" id="themeIcon">
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Основний контент -->
+    <!-- Калькулятор -->
+    <div class="container calculator">
+      <h2 id="header" class="mar-48">Калькулятор</h2>
+      <label id="select-label-number-system" class="mar-8" for="number-system">Виберіть систему в якій записуватимуться числа</label>
+      <select id="number-system" class="form-select mar-16" aria-label="Default select example">
           <option value=""></option>
           <option value="HEX">HEX</option>
           <option value="DEC">DEC</option>
           <option value="OCT">OCT</option>
           <option value="BIN">BIN</option>
-        </select>
+      </select>
+      <div class="row input-block mar-72">
+        <div class="col-lg mar-8">
+          <input id="first-number" class="input-num" type="text" placeholder="Введіть перше число" />
+        </div>
+        <div class="col-lg mar-8">
+          <select id="select-label-action" class="form-select input-num" aria-label="Default select example">
+            <option value="">Оберіть арифметичну операцію</option>
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+          </select>
+        </div>
+        <div class="col-lg mar-8">
+          <input id="second-number" class="input-num" type="text" placeholder="Введіть друге число" />
+        </div>
       </div>
-      <div class="input-block">
-        <input
-          type="text"
-          placeholder="Введіть перше число"
-          id="first-number"
-        />
+      <div class="calculate-button mar-48">
+        <button onclick="calculate()">Обчислити</button>
       </div>
-      <div class="select-action-block">
-        <label id="select-label-action" for="action">Виберіть дію</label>
-        <select id="action">
-          <option value=""></option>
-          <option value="+">+</option>
-          <option value="-">-</option>
-          <option value="*">*</option>
-          <option value="/">/</option>
-        </select>
-      </div>
-      <div class="input-block">
-        <input
-          type="text"
-          placeholder="Введіть друге число"
-          id="second-number"
-        />
-      </div>
-
-      <button class="calculate-button" onclick="calculate()">Обчислити</button>
       <div class="result-block" id="result">Результат:</div>
-      <button class="theme-toggle" onclick="toggleTheme()">Змінити тему</button>
     </div>
-
+    <!-- Підключення скриптів -->
     <script src="./JS/script.js"></script>
+    <!-- Підключення Bootstrap 5 -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
   </body>
 </html>
