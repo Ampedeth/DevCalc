@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./CSS/styles.css" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="calculator">
+      <div class="select-block">
+        <label id="select-label-number-system" for="number-system"
+          >Виберіть систему в якій записуватимуться числа</label
+        >
+        <select id="number-system">
+          <option value=""></option>
+          <option value="HEX">HEX</option>
+          <option value="DEC">DEC</option>
+          <option value="OCT">OCT</option>
+          <option value="BIN">BIN</option>
+        </select>
+      </div>
+      <div class="input-block">
+        <input
+          type="text"
+          placeholder="Введіть перше число"
+          id="first-number"
+        />
+      </div>
+      <div class="select-action-block">
+        <label id="select-label-action" for="action">Виберіть дію</label>
+        <select id="action">
+          <option value=""></option>
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">*</option>
+          <option value="/">/</option>
+        </select>
+      </div>
+      <div class="input-block">
+        <input
+          type="text"
+          placeholder="Введіть друге число"
+          id="second-number"
+        />
+      </div>
+
+      <button class="calculate-button" onclick="calculate()">Обчислити</button>
+      <div class="result-block" id="result">Результат:</div>
+      <button class="theme-toggle" onclick="toggleTheme()">Змінити тему</button>
+    </div>
+
+    <script src="./JS/script.js"></script>
+  </body>
+</html>

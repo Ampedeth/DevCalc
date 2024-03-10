@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: #aaa;
+}
+
+.calculator {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.select-block {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.select-block select {
+    width: 100px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.input-block{
+    margin: 5px 0px 5px 0px;
+}
+
+.select-action-block{
+    padding: 5px 0px 5px 0px;
+}
+
+.result-block {
+    margin-top: 5px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
+
+
+.calculate-button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    background-image: linear-gradient(to right, #e88234, #8c9091);
+}
+
+.calculate-button:hover {
+    background-image: linear-gradient(to right, #8c9091, #e88234);
+}
