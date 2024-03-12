@@ -1,6 +1,6 @@
 /* Кольорові змінні */
 :root {
-    --primary-color: #e88234;
+    --primary-color: #0A66C2;
     --secondary-color: #8c9091;
     /* Світла тема */
     --light-bg: #fff;
@@ -32,7 +32,25 @@ body {
     color: var(--text);
 }
 
+#calculator {
+    display: block;
+}
+
+#convertor,
+#guide {
+    display: none;
+}
+
+.tool-container {
+    height: 75vh;
+    background: #ffffff;
+}
+
 /* Шапка */
+#navbar {
+    background-color: #ffffff;
+}
+
 .header {
     background-color: var(--nav);
     box-shadow: 8, 8, 8, #000000;
@@ -48,7 +66,13 @@ body {
     display: flex;
     align-items: center;
     text-decoration: none;
+    transition: transform 0.5s ease;
 }
+
+.navbar-brand-container:hover {
+    transform: scale(1.1);
+}
+
 
 .navbar-logo {
     width: 30px;
@@ -68,16 +92,29 @@ body {
     color: var(--text);
 }
 
-.nav-link:hover {
-    color: var(--dark-text);
+.active {
+    font-weight: bold;
 }
 
-.light-theme .nav-link {
+.nav-link {
     color: #171717;
 }
 
-.light-theme .nav-link:hover {
+.nav-link:hover {
     color: #000000;
+}
+
+.nav-link:active {
+    color: #171717;
+}
+
+.nav-link:disabled {
+    color: #171717;
+}
+
+.nav-link:focus {
+    color: #000000;
+    font-weight: bold;
 }
 
 .dark-theme .nav-link {
@@ -86,6 +123,19 @@ body {
 
 .dark-theme .nav-link:hover {
     color: #ffffff;
+}
+
+.dark-theme .nav-link:active {
+    color: #f5f5f5;
+}
+
+.dark-theme .nav-link:disabled {
+    color: #f5f5f5;
+}
+
+.dark-theme .nav-link:focus {
+    color: #ffffff;
+    font-weight: bold;
 }
 
 /* Кнопка зміни теми */
@@ -103,7 +153,7 @@ body {
 
 .theme-button img {
     height: 30px;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
 }
 
 .theme-button img.hidden {
@@ -111,28 +161,28 @@ body {
 }
 
 /* Калькулятор */
-.calculator {
+.tool-container {
     padding: 10%;
     padding-top: 96px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: var(--main);
 }
 
-.input-num {
+.input {
     height: 100%;
     width: 100%;
 }
 
 /* Кнопка обчислення */
-.calculate-button {
+.btn {
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.calculate-button button {
+.btn button {
     font-size: 2rem;
     height: 25%;
-    width: 25%;
     background-color: #0A66C2;
     border: 0;
     border-radius: 100px;
@@ -148,36 +198,57 @@ body {
     transition: background-color 0.167s cubic-bezier(0.4, 0, 0.2, 1), color 0.167s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.calculate-button button:hover { 
+.btn button:hover {
     background-color: #16437E;
 }
 
-.calculate-button button:active {
+.btn button:active {
     background: #09223b;
     color: rgba(255, 255, 255, 0.7);
 }
 
-.calculate-button button:disabled { 
+.btn button:disabled {
     cursor: not-allowed;
     background: rgba(0, 0, 0, 0.08);
     color: rgba(0, 0, 0, 0.3);
-}  
+}
 
 /* Блок результату */
-.result-block {
+.output {
     display: flex;
     justify-content: center;
     font-size: 3rem;
     color: var(--result);
 }
 
-/* Футер */
-footer {
-    margin-top: auto;
+/* Стрілка для конвертора */
+.arrow-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.footer-txt-right {
-    text-align: end;
+.arrow-container img {
+    width: 25%;
+    border-radius: 100%;
+}
+
+/* Анімація лого */
+.rotate-animation {
+    animation: rotate 1s ease-in-out;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Теми */
