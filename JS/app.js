@@ -22,11 +22,39 @@ function calculate() {
   const firstNumber = calcFirstNumber.value;
   const action = calcAction.value;
   const secondNumber = calcSecondNumber.value;
-  // Виводимо значення у вікні alert
-  alert("Система числення: " + numberSystem + "\n" +
-        "Перше число: " + firstNumber + "\n" +
-        "Дія: " + action + "\n" +
-        "Друге число: " + secondNumber);
+  let result = ''
+  let first_number_to_DEC = '';
+  let second_number_to_DEC = '';
+
+  // Код який конвертує введені числа в десяткову систему числення для зменьшення об'єма коду
+  
+  first_number_to_DEC = parseInt(firstNumber, numberSystem)
+  second_number_to_DEC = parseInt(secondNumber, numberSystem)
+  
+
+  // Виконання дії на числами
+  switch (action) {
+    case "+" :
+      result = first_number_to_DEC + second_number_to_DEC;
+      break;
+    case '-':
+      result = first_number_to_DEC - second_number_to_DEC;
+      break;
+    case '*':
+      result = first_number_to_DEC * second_number_to_DEC;
+      break;
+    case '/':
+      result = first_number_to_DEC / second_number_to_DEC;
+      break;
+  }
+
+  // Конвертування відповідь в потрібну систему числення
+  if (numberSystem == '16') {
+    result = Number(result).toString(numberSystem).toUpperCase();
+  } else { result = Number(result).toString(numberSystem) }
+  
+  // Виведення результату
+  calcResult.textContent = result;
 }
 
 // Функція обчислення результату в конверторі
@@ -34,10 +62,26 @@ function convert() {
   const startSystem = convertStartSystem.value;
   const input = convertInput.value;
   const resultSystem = convertResultSystem.value;
-  const result = convertResult.value;
-  // Виводимо значення у вікні alert
-  alert("Початкова система: " + startSystem + "\n" +
-        "Введене значення: " + input + "\n" +
-        "Результатна система: " + resultSystem + "\n" +
-        "Результат: " + result);
+  let result = convertResult.value;
+  let input_to_DEC = '';
+
+  // Код який конвертує введене число в десяткову систему числення для зменьшення об'єма коду
+  if (startSystem === 'BIN') {
+    input_to_DEC = parseInt(input, 2)
+  } else if (startSystem === 'OCT') {
+    input_to_DEC = parseInt(input, 8)
+  } else if (startSystem === 'HEX'){
+    input_to_DEC = parseInt(input, 16)
+  } else {
+    input_to_DEC = input
+  };
+
+  //Код який переводить число з десяткової в потрібну користувачеві систему ислення
+  if (resultSystem == '16') {
+    result = Number(input_to_DEC).toString(resultSystem).toUpperCase()
+  } else {result = Number(input_to_DEC).toString(resultSystem)}
+  
+  // Виводимо значення
+  convertResult.value = result;
+  convertResult.style.fontWeight = "bold";
 }
