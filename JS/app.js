@@ -18,6 +18,7 @@ const convertResult = document.getElementById("convert-result");
 // ________________________________________________________________________________________
 // Функція обчислення результату в калькуляторі
 function calculate() {
+  // Отримуємо значення введених полів
   const numberSystem = calcNumberSystem.value;
   const firstNumber = calcFirstNumber.value;
   const action = calcAction.value;
@@ -26,17 +27,17 @@ function calculate() {
   let first_number_to_DEC = "";
   let second_number_to_DEC = "";
 
+  // Перевіряємо валідність введених даних
   let status = validation("calculate");
   if (status === "error") {
     return;
   }
 
-  // Код який конвертує введені числа в десяткову систему числення для зменшення об'єму коду
-
+  // Конвертуємо введені числа в десяткову систему числення
   first_number_to_DEC = parseInt(firstNumber, numberSystem);
   second_number_to_DEC = parseInt(secondNumber, numberSystem);
 
-  // Виконання дії на числами
+  // Виконуємо обрану дію над числами
   switch (action) {
     case "+":
       result = first_number_to_DEC + second_number_to_DEC;
@@ -52,7 +53,7 @@ function calculate() {
       break;
   }
 
-  // Конвертування відповідь в потрібну систему числення
+  // Конвертуємо результат в обрану систему числення
   if (numberSystem == "16") {
     result =
       "Результат: " + Number(result).toString(numberSystem).toUpperCase();
@@ -60,24 +61,26 @@ function calculate() {
     result = "Результат: " + Number(result).toString(numberSystem);
   }
 
-  // Виведення результату
+  // Виводимо результат на екран
   calcResult.textContent = result;
 }
 
 // Функція обчислення результату в конверторі
 function convert() {
+  // Отримуємо значення введених полів
   const startSystem = convertStartSystem.value;
   const input = convertInput.value;
   const resultSystem = convertResultSystem.value;
   let result = convertResult.value;
   let input_to_DEC = "";
 
+  // Перевіряємо валідність введених даних
   let status = validation("convert");
   if (status === "error") {
     return;
   }
 
-  // Код який конвертує введене число в десяткову систему числення для зменшення об'єму коду
+  // Конвертуємо введене число в десяткову систему числення
   if (startSystem === "2") {
     input_to_DEC = parseInt(input, 2);
   } else if (startSystem === "8") {
@@ -88,23 +91,25 @@ function convert() {
     input_to_DEC = input;
   }
 
-  //Код який переводить число з десяткової в потрібну користувачеві систему числення
+  // Конвертуємо число з десяткової в обрану систему числення
   if (resultSystem == "16") {
     result = Number(input_to_DEC).toString(resultSystem).toUpperCase();
   } else {
     result = Number(input_to_DEC).toString(resultSystem);
   }
 
-  // Виводимо значення
+  // Виводимо результат на екран
   convertResult.value = result;
 }
 
 // Валідація значень
 function validation(typeValidation) {
-  let status = "normal"; // За замовчуванням статус - нормальний
+  // Початково статус валідності встановлюється як "normal"
+  let status = "normal";
 
   switch (typeValidation) {
     case "calculate":
+      // Перевіряємо валідність введених даних для калькулятора
       if (!isValidField(calcNumberSystem.value)) {
         showAlert("Ви не вказали систему числення");
         status = "error";
@@ -130,6 +135,7 @@ function validation(typeValidation) {
       }
       break;
     case "convert":
+      // Перевіряємо валідність введених даних для конвертора
       if (!isValidField(convertStartSystem.value)) {
         showAlert("Ви не вказали систему числення для вводу");
         status = "error";
@@ -158,7 +164,12 @@ function isValidField(value) {
 
 // Виводить повідомлення з переданим текстом на екран
 function showAlert(message) {
-  alert(message);
+  const customAlertContainer = document.getElementById(
+    "custom-alert-container"
+  );
+  const customAlertMassage = document.getElementById("custom-alert-massage");
+  customAlertMassage.textContent = message;
+  customAlertContainer.style.display = "flex";
 }
 
 // Перевірка чи відповідає введене число системі числення

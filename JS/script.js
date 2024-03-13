@@ -14,6 +14,11 @@ const navLinks = document.querySelectorAll(".nav-link");
 const navbarButton = document.getElementById("navbar-button");
 const logo = document.getElementById("logo");
 const themeIcon = document.getElementById("themeIcon");
+// Власний alert
+const customAlert = document.getElementById("custom-alert");
+const customAlertContainer = document.getElementById("custom-alert-container");
+const customAlertHeader = document.getElementById("custom-alert-header");
+const customAlertMassage = document.getElementById("custom-alert-massage");
 // Елементи калькулятора
 const calculator = document.getElementById("calculator");
 const calcHeader = document.getElementById("calc-header");
@@ -41,8 +46,11 @@ function toggleTheme() {
 
 // Встановлення світлої теми
 function setLightTheme() {
+  // Видаляє клас "dark-theme" з body та встановлює світлі кольори для різних елементів
   body.classList.remove(DARK_THEME);
   body.style.background = "#f0f0f0";
+  customAlert.style.backgroundColor = "#ffffff";
+  customAlert.style.color = "#000000";
   navbar.style.backgroundColor = "#fff";
   navbar.style.color = "#000";
   navbarButton.style.backgroundColor = "#f0f0f0";
@@ -63,8 +71,11 @@ function setLightTheme() {
 
 // Встановлення темної теми
 function setDarkTheme() {
+  // Додає клас "dark-theme" до body та встановлює темні кольори для різних елементів
   body.classList.add(DARK_THEME);
   body.style.background = "#adadad";
+  customAlert.style.backgroundColor = "#333";
+  customAlert.style.color = "#ffffff";
   navbar.style.backgroundColor = "#333";
   navbar.style.color = "#fff";
   navbarButton.style.backgroundColor = "#adadad";
@@ -79,13 +90,15 @@ function setDarkTheme() {
 
   // Фарбуємо всі елементи .nav-link в білий колір
   navLinks.forEach((link) => {
-    link.style.color = "#ffffff"; // Колір тексту для dark-theme
+    link.style.color = "#ffffff"; // Колір тексту для темної теми
   });
 }
 
 // Встановлення іконки залежно від теми
 function updateThemeIcon() {
+  // Визначає, чи активна темна тема
   const isDark = body.classList.contains(DARK_THEME);
+  // Встановлює відповідну іконку для темної або світлої теми
   const iconSrc = isDark ? "./IMG/moon.png" : "./IMG/sun.png";
   themeIcon.classList.add("hidden");
   setTimeout(() => {
@@ -96,6 +109,7 @@ function updateThemeIcon() {
 
 // Функція для відображення калькулятора
 function showCalculator() {
+  // Приховує всі інші елементи та відображає калькулятор
   hideAll();
   calculator.style.display = "block";
   setActiveNavLink("nav-link-calc");
@@ -103,6 +117,7 @@ function showCalculator() {
 
 // Функція для відображення конвертора
 function showConvertor() {
+  // Приховує всі інші елементи та відображає конвертор
   hideAll();
   convertor.style.display = "block";
   setActiveNavLink("nav-link-convert");
@@ -110,6 +125,7 @@ function showConvertor() {
 
 // Функція для відображення довідки
 function showGuide() {
+  // Приховує всі інші елементи та відображає довідку
   hideAll();
   guide.style.display = "block";
   setActiveNavLink("nav-link-guide");
@@ -117,39 +133,50 @@ function showGuide() {
 
 // Функція для приховування всіх елементів
 function hideAll() {
+  // Приховує калькулятор, конвертор та довідку
   calculator.style.display = "none";
   convertor.style.display = "none";
   guide.style.display = "none";
 }
 
+// Функція для приховування власного alert
+function toggleCustomAlert() {
+  // Приховує власний alert
+  customAlertContainer.style.display = "none";
+}
+
 // Функція для встановлення активного стану навігації
 function setActiveNavLink(id) {
+  // Видаляє клас "active" з усіх елементів навігації
   const navLinks = document.querySelectorAll(".nav-item .nav-link");
   navLinks.forEach((link) => {
     link.classList.remove("active");
   });
 
+  // Встановлює клас "active" для вказаного елемента навігації
   const activeLink = document.getElementById(id);
   activeLink.classList.add("active");
 
-  // Перевіряємо наявність класу .dark-theme
+  // Перевіряє наявність класу "dark-theme" в body
   const isDarkTheme = body.classList.contains(DARK_THEME);
 
-  // Змінюємо колір тексту в залежності від теми
+  // Встановлює відповідний колір тексту для активного елемента навігації залежно від теми
   if (isDarkTheme) {
-    activeLink.style.color = "#ffffff"; // Колір тексту для dark-theme
+    activeLink.style.color = "#ffffff"; // Колір тексту для темної теми
   } else {
     activeLink.style.color = "#000000"; // Колір тексту для світлої теми
   }
 
-  // Зберігаємо активну вкладку в localStorage
+  // Зберігає активну вкладку в localStorage
   localStorage.setItem("activeNav", id);
 }
 
 // Функція для анімації логотипа при натисканні на нього
 function logoAnimate() {
+  // Отримує зображення логотипа та додає клас для анімації
   const logoImage = logo.querySelector(".navbar-logo");
   logoImage.classList.add("rotate-animation");
+  // Видаляє клас для анімації через 1 секунду
   setTimeout(() => {
     logoImage.classList.remove("rotate-animation");
   }, 1000);
@@ -157,10 +184,12 @@ function logoAnimate() {
 
 // Функція для зміни систем числення на протилежну в конверторі
 function changeNumberSystem() {
+  // Отримує елемент зі стрілкою для анімації
   const arrow = document.getElementById("arrow");
   arrow.classList.add("change-animation");
 
   setTimeout(() => {
+    // Отримує поточні системи числення та їх значення
     const [startSystem, resultSystem] = getConversionSystems();
     const [startValue, resultValue] = getSystemValues(
       startSystem,
@@ -168,51 +197,62 @@ function changeNumberSystem() {
     );
     const [startText, resultText] = getSystemTexts(startSystem, resultSystem);
 
+    // Міняє місцями системи числення та їх значення
     swapSystemValues(startSystem, resultSystem, startValue, resultValue);
     swapSystemTexts(startSystem, resultSystem, startText, resultText);
 
+    // Викликає події зміни для оновлення конвертора
     triggerChangeEvents(startSystem, resultSystem);
     arrow.classList.remove("change-animation");
   }, 1000);
 }
 
+// Функція для отримання елементів систем числення
 function getConversionSystems() {
   const startSystem = document.getElementById("convert-start-system");
   const resultSystem = document.getElementById("convert-result-system");
   return [startSystem, resultSystem];
 }
 
+// Функція для отримання значень систем числення
 function getSystemValues(startSystem, resultSystem) {
   const startValue = startSystem.value;
   const resultValue = resultSystem.value;
   return [startValue, resultValue];
 }
 
+// Функція для отримання текстових позначень систем числення
 function getSystemTexts(startSystem, resultSystem) {
   const startText = startSystem.options[startSystem.selectedIndex].text;
   const resultText = resultSystem.options[resultSystem.selectedIndex].text;
   return [startText, resultText];
 }
 
+// Функція для обміну значень систем числення
 function swapSystemValues(startSystem, resultSystem, startValue, resultValue) {
   const temp = startValue;
   startSystem.value = resultValue;
   resultSystem.value = temp;
 }
 
+// Функція для обміну текстових позначень систем числення
 function swapSystemTexts(startSystem, resultSystem, startText, resultText) {
   startSystem.options[startSystem.selectedIndex].text = resultText;
   resultSystem.options[resultSystem.selectedIndex].text = startText;
 }
 
+// Функція для викликання подій зміни систем числення
 function triggerChangeEvents(startSystem, resultSystem) {
   startSystem.dispatchEvent(new Event("change"));
   resultSystem.dispatchEvent(new Event("change"));
 }
 
-// Задання теми при запуску сторінки
+// Виконується при старті сторінки
 document.addEventListener("DOMContentLoaded", function () {
+  // Встановлення теми при старті сторінки
   toggleTheme();
+  // Приховування власного alert при старті сторінки
+  customAlertContainer.style.display = "none";
   // Отримуємо URL ідентифікатор сторінки і встановлюємо активний стан навігації
   const currentURL = window.location.href;
   if (currentURL.includes("calculator")) {
