@@ -10,6 +10,8 @@ const LIGHT_THEME = "light-theme";
 // Стандартні елементи
 const body = document.body;
 const navbar = document.querySelector(".navbar");
+const navLinks = document.querySelectorAll(".nav-link");
+const navbarButton = document.getElementById("navbar-button");
 const logo = document.getElementById("logo");
 const themeIcon = document.getElementById("themeIcon");
 // Елементи калькулятора
@@ -43,6 +45,8 @@ function setLightTheme() {
   body.style.background = "#f0f0f0";
   navbar.style.backgroundColor = "#fff";
   navbar.style.color = "#000";
+  navbarButton.style.backgroundColor = "#f0f0f0";
+  navbarButton.style.color = "#000";
   calcHeader.style.color = "#000";
   calcDescription.style.color = "#000";
   convertor.style.color = "#000";
@@ -50,6 +54,11 @@ function setLightTheme() {
   convertor.style.backgroundColor = "#fff";
   guide.style.backgroundColor = "#fff";
   guide.style.color = "#000";
+
+  // Фарбуємо всі елементи .nav-link в чорний колір
+  navLinks.forEach((link) => {
+    link.style.color = "#000000"; // Колір тексту для світлої теми
+  });
 }
 
 // Встановлення темної теми
@@ -58,6 +67,8 @@ function setDarkTheme() {
   body.style.background = "#adadad";
   navbar.style.backgroundColor = "#333";
   navbar.style.color = "#fff";
+  navbarButton.style.backgroundColor = "#adadad";
+  navbarButton.style.color = "#fff";
   calcHeader.style.color = "#fff";
   calcDescription.style.color = "#fff";
   convertor.style.color = "#fff";
@@ -65,6 +76,11 @@ function setDarkTheme() {
   convertor.style.backgroundColor = "#333";
   guide.style.backgroundColor = "#333";
   guide.style.color = "#fff";
+
+  // Фарбуємо всі елементи .nav-link в білий колір
+  navLinks.forEach((link) => {
+    link.style.color = "#ffffff"; // Колір тексту для dark-theme
+  });
 }
 
 // Встановлення іконки залежно від теми
@@ -82,18 +98,21 @@ function updateThemeIcon() {
 function showCalculator() {
   hideAll();
   calculator.style.display = "block";
+  setActiveNavLink("nav-link-calc");
 }
 
 // Функція для відображення конвертора
 function showConvertor() {
   hideAll();
   convertor.style.display = "block";
+  setActiveNavLink("nav-link-convert");
 }
 
 // Функція для відображення довідки
 function showGuide() {
   hideAll();
   guide.style.display = "block";
+  setActiveNavLink("nav-link-guide");
 }
 
 // Функція для приховування всіх елементів
@@ -101,6 +120,30 @@ function hideAll() {
   calculator.style.display = "none";
   convertor.style.display = "none";
   guide.style.display = "none";
+}
+
+// Функція для встановлення активного стану навігації
+function setActiveNavLink(id) {
+  const navLinks = document.querySelectorAll(".nav-item .nav-link");
+  navLinks.forEach((link) => {
+    link.classList.remove("active");
+  });
+
+  const activeLink = document.getElementById(id);
+  activeLink.classList.add("active");
+
+  // Перевіряємо наявність класу .dark-theme
+  const isDarkTheme = body.classList.contains(DARK_THEME);
+
+  // Змінюємо колір тексту в залежності від теми
+  if (isDarkTheme) {
+    activeLink.style.color = "#ffffff"; // Колір тексту для dark-theme
+  } else {
+    activeLink.style.color = "#000000"; // Колір тексту для світлої теми
+  }
+
+  // Зберігаємо активну вкладку в localStorage
+  localStorage.setItem("activeNav", id);
 }
 
 // Функція для анімації логотипа при натисканні на нього
@@ -113,37 +156,6 @@ function logoAnimate() {
 }
 
 // Функція для зміни систем числення на протилежну в конверторі
-// function changeNumberSystem() {
-//   const arrow = document.getElementById("arrow");
-//   arrow.classList.add("change-animation");
-
-//   setTimeout(() => {
-//     const startSystem = document.getElementById("convert-start-system");
-//     const resultSystem = document.getElementById("convert-result-system");
-
-//     // Отримання значення вибраної системи числення для першого числа
-//     let startValue = startSystem.value;
-//     let resultValue = resultSystem.value;
-//     const temp = startValue;
-
-//     // Отримання вибраних текстів селекторів
-//     const startText = startSystem.options[startSystem.selectedIndex].text;
-//     const resultText = resultSystem.options[resultSystem.selectedIndex].text;
-
-//     // Зміна текстів опцій
-//     startSystem.options[startSystem.selectedIndex].text = resultText;
-//     resultSystem.options[resultSystem.selectedIndex].text = startText;
-//     startValue = resultValue;
-//     resultValue = temp;
-//     startSystem.value = startValue;
-//     resultSystem.value = resultValue;
-//     // Оновлення значення вибраної опції
-//     startSystem.dispatchEvent(new Event("change"));
-//     resultSystem.dispatchEvent(new Event("change"));
-
-//     arrow.classList.remove("change-animation");
-//   }, 1000);
-// }
 function changeNumberSystem() {
   const arrow = document.getElementById("arrow");
   arrow.classList.add("change-animation");
@@ -201,4 +213,13 @@ function triggerChangeEvents(startSystem, resultSystem) {
 // Задання теми при запуску сторінки
 document.addEventListener("DOMContentLoaded", function () {
   toggleTheme();
+  // Отримуємо URL ідентифікатор сторінки і встановлюємо активний стан навігації
+  const currentURL = window.location.href;
+  if (currentURL.includes("calculator")) {
+    setActiveNavLink("nav-link-calc");
+  } else if (currentURL.includes("convertor")) {
+    setActiveNavLink("nav-link-convert");
+  } else if (currentURL.includes("guide")) {
+    setActiveNavLink("nav-link-guide");
+  }
 });
