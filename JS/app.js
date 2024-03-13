@@ -55,8 +55,9 @@ function calculate() {
 
   // Конвертуємо результат в обрану систему числення
   if (numberSystem == "16") {
-    result =
-      "Результат: " + Number(result).toString(numberSystem).toUpperCase();
+      result = "Результат: " + Number(result).toString().toUpperCase(numberSystem);
+  } else if (numberSystem == "2") {
+    result = "Результат: " + Math.abs(Number(result)).toString(numberSystem);
   } else {
     result = "Результат: " + Number(result).toString(numberSystem);
   }
@@ -88,7 +89,7 @@ function convert() {
   } else if (startSystem === "16") {
     input_to_DEC = parseInt(input, 16);
   } else {
-    input_to_DEC = input;
+    input_to_DEC = Number(input);
   }
 
   // Конвертуємо число з десяткової в обрану систему числення
