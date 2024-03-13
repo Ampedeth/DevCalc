@@ -183,6 +183,43 @@ function logoAnimate() {
 }
 
 // Функція для зміни систем числення на протилежну в конверторі
+// function changeNumberSystem() {
+//   // Отримує елемент зі стрілкою для анімації
+//   const arrow = document.getElementById("arrow");
+//   arrow.classList.add("change-animation");
+
+//   setTimeout(() => {
+//     // Отримує поточні системи числення та їх значення
+//     const [startSystem, resultSystem] = getConversionSystems();
+//     const [startSystemValue, resultSystemValue] = getSystemValues(
+//       startSystem,
+//       resultSystem
+//     );
+//     const [startText, resultText] = getSystemTexts(startSystem, resultSystem);
+
+//     // Змінюємо значення вводу та результату місцями
+//     const input = document.getElementById("convert-input");
+//     const result = document.getElementById("convert-result");
+//     const inputValue = input.value;
+//     const resultValue = result.value;
+//     let tempValue = inputValue;
+//     input.value = resultValue;
+//     result.value = tempValue;
+
+//     // Міняє місцями системи числення та їх значення
+//     swapSystemValues(
+//       startSystem,
+//       resultSystem,
+//       startSystemValue,
+//       resultSystemValue
+//     );
+//     swapSystemTexts(startSystem, resultSystem, startText, resultText);
+
+//     // Викликає події зміни для оновлення конвертора
+//     triggerChangeEvents(startSystem, resultSystem);
+//     arrow.classList.remove("change-animation");
+//   }, 1000);
+// }
 function changeNumberSystem() {
   // Отримує елемент зі стрілкою для анімації
   const arrow = document.getElementById("arrow");
@@ -191,18 +228,27 @@ function changeNumberSystem() {
   setTimeout(() => {
     // Отримує поточні системи числення та їх значення
     const [startSystem, resultSystem] = getConversionSystems();
-    const [startValue, resultValue] = getSystemValues(
+    const [startSystemValue, resultSystemValue] = getSystemValues(
       startSystem,
       resultSystem
     );
     const [startText, resultText] = getSystemTexts(startSystem, resultSystem);
 
     // Міняє місцями системи числення та їх значення
-    swapSystemValues(startSystem, resultSystem, startValue, resultValue);
+    swapSystemValues(
+      startSystem,
+      resultSystem,
+      startSystemValue,
+      resultSystemValue
+    );
     swapSystemTexts(startSystem, resultSystem, startText, resultText);
+
+    // Міняє місцями значення input'ів
+    swapInputValues();
 
     // Викликає події зміни для оновлення конвертора
     triggerChangeEvents(startSystem, resultSystem);
+
     arrow.classList.remove("change-animation");
   }, 1000);
 }
@@ -216,9 +262,9 @@ function getConversionSystems() {
 
 // Функція для отримання значень систем числення
 function getSystemValues(startSystem, resultSystem) {
-  const startValue = startSystem.value;
-  const resultValue = resultSystem.value;
-  return [startValue, resultValue];
+  const startSystemValue = startSystem.value;
+  const resultSystemValue = resultSystem.value;
+  return [startSystemValue, resultSystemValue];
 }
 
 // Функція для отримання текстових позначень систем числення
@@ -228,10 +274,22 @@ function getSystemTexts(startSystem, resultSystem) {
   return [startText, resultText];
 }
 
+// Функція для отримання елементів input'ів
+function getInputElements() {
+  const input = document.getElementById("convert-input");
+  const result = document.getElementById("convert-result");
+  return [input, result];
+}
+
 // Функція для обміну значень систем числення
-function swapSystemValues(startSystem, resultSystem, startValue, resultValue) {
-  const temp = startValue;
-  startSystem.value = resultValue;
+function swapSystemValues(
+  startSystem,
+  resultSystem,
+  startSystemValue,
+  resultSystemValue
+) {
+  const temp = startSystemValue;
+  startSystem.value = resultSystemValue;
   resultSystem.value = temp;
 }
 
@@ -239,6 +297,15 @@ function swapSystemValues(startSystem, resultSystem, startValue, resultValue) {
 function swapSystemTexts(startSystem, resultSystem, startText, resultText) {
   startSystem.options[startSystem.selectedIndex].text = resultText;
   resultSystem.options[resultSystem.selectedIndex].text = startText;
+}
+
+// Функція для обміну значень input'ів
+function swapInputValues() {
+  const [input, result] = getInputElements();
+  const inputValue = input.value;
+  const resultValue = result.value;
+  input.value = resultValue;
+  result.value = inputValue;
 }
 
 // Функція для викликання подій зміни систем числення
