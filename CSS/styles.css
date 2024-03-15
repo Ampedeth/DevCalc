@@ -41,13 +41,6 @@ body {
   display: none;
 }
 
-.tool-container {
-  padding: 5%;
-  /* max-height: 75vh; */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: var(--main);
-}
-
 /* Шапка */
 #navbar {
   background-color: #ffffff;
@@ -176,8 +169,8 @@ body {
 
 /* Калькулятор */
 .tool-container {
-  padding: 10%;
-  padding-top: 96px;
+  padding: 5%;
+  min-height: 80vh;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: var(--main);
 }

@@ -40,7 +40,7 @@ li {
 
 @media screen and (max-height: 800px) {
     .mar-8 {
-        margin-bottom: 8px;
+        margin-bottom: 4px;
     }
 
     .mar-16 {
@@ -48,7 +48,7 @@ li {
     }
 
     .mar-24 {
-        margin: 0;
+        margin-bottom: 0px;
     }
 
     .mar-36 {

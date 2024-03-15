@@ -328,5 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setActiveNavLink("nav-link-convert");
   } else if (currentURL.includes("guide")) {
     setActiveNavLink("nav-link-guide");
+  } else {
+    setActiveNavLink("nav-link-calc");
   }
 });
